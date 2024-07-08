@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-    db, err := database.InitDB("postgres://username:password@localhost/dbname?sslmode=disable")
+    db, err := database.InitDB("postgres://authuser:authpassword@localhost:5432/authdb?sslmode=disable")
     if err != nil {
         log.Fatalf("Failed to connect to database: %v", err)
     }
