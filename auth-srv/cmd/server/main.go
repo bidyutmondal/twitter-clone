@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-    db, err := database.InitDB("postgres://authuser:authpassword@localhost:5432/authdb?sslmode=disable")
+    db, err := database.InitDB("postgres://authuser:authpassword@localhost:5433/auth_db?sslmode=disable")
     if err != nil {
         log.Fatalf("Failed to connect to database: %v", err)
     }
@@ -28,7 +28,7 @@ func main() {
     r.POST("/register", authHandler.Register)
     r.POST("/login", authHandler.Login)
 
-    if err := r.Run(":8080"); err != nil {
+    if err := r.Run(":8081"); err != nil {
         log.Fatalf("Failed to start server: %v", err)
     }
 }

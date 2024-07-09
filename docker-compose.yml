@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  auth-postgres:
+    image: postgres:latest
+    container_name: auth-postgres
+    environment:
+      POSTGRES_USER: authuser
+      POSTGRES_PASSWORD: authpassword
+      POSTGRES_DB: auth_db
+    ports:
+      - "5433:5432"
+    networks:
+      - twitter-clone-network
+
+  user-management-postgres:
+    image: postgres:latest
+    container_name: user-management-postgres
+    environment:
+      POSTGRES_USER: usermgmtuser
+      POSTGRES_PASSWORD: usermgmtpassword
+      POSTGRES_DB: user_management_db
+    ports:
+      - "5434:5432"
+    networks:
+      - twitter-clone-network
+
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    environment:
+      CASSANDRA_CLUSTER_NAME: "TwitterCloneCluster"
+      CASSANDRA_DC: "datacenter1"
+      CASSANDRA_RACK: "rack1"
+    ports:
+      - "9042:9042"
+    networks:
+      - twitter-clone-network
+
+networks:
+  twitter-clone-network:
+    driver: bridge
